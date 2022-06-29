@@ -21,7 +21,7 @@ export default class ConversationsTransferInteractionPlugin extends FlexPlugin {
    */
   async init(flex, manager) {
     flex.TaskCanvasHeader.Content.add(
-      <TransferButton key='conversation-park-button' />,
+      <TransferButton key='conversation-transfer-button' />,
       {
         sortOrder: 1,
         if: props =>
@@ -29,9 +29,5 @@ export default class ConversationsTransferInteractionPlugin extends FlexPlugin {
           props.task.taskStatus === 'assigned'
       }
     )
-
-    flex.Actions.addListener('beforeCompleteTask', task => {
-      flex.Actions.invokeAction('CloseInteraction', { task: task.task })
-    })
   }
 }

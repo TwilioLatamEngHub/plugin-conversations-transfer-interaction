@@ -1,6 +1,8 @@
 import { Actions, TaskHelper } from '@twilio/flex-ui'
 import fetch from 'node-fetch'
 
+const URL_TRANSFER_INTERACTION = process.env.FLEX_APP_URL_TRANSFER_INTERACTION
+
 const getAgent = async payload => {
   const participants = await payload.task.getParticipants(
     payload.task.attributes.flexInteractionChannelSid
@@ -17,7 +19,7 @@ const getAgent = async payload => {
   return agent
 }
 
-async function closeParticipantAndtransfer(payload, original) {
+const closeParticipantAndtransfer = async (payload, original) => {
   if (!TaskHelper.isCBMTask(payload.task)) {
     return original(payload)
   }
@@ -34,16 +36,13 @@ async function closeParticipantAndtransfer(payload, original) {
   }
 
   try {
-    const res = await fetch(
-      'https://serverless-transfer-interaction-1420-dev.twil.io/transfer-interaction',
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(body)
-      }
-    )
+    const res = await fetch(URL_TRANSFER_INTERACTION, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
 
     console.log(res)
   } catch (error) {
@@ -51,8 +50,6 @@ async function closeParticipantAndtransfer(payload, original) {
   }
 }
 
-export const setUpActions = () => {
-  Actions.replaceAction('TransferTask', (payload, original) =>
-    closeParticipantAndtransfer(payload, original)
-  )
-}
+Actions.replaceAction('TransferTask', (payload, original) =>
+  closeParticipantAndtransfer(payload, original)
+)

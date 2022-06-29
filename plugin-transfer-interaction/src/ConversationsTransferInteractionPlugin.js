@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlexPlugin } from '@twilio/flex-plugin'
 
-import { setUpActions } from './actions'
+import './actions'
 import { TransferButton } from './components'
 
 const PLUGIN_NAME = 'ConversationsTransferInteractionPlugin'
@@ -19,8 +19,6 @@ export default class ConversationsTransferInteractionPlugin extends FlexPlugin {
    * @param manager { import('@twilio/flex-ui').Manager }
    */
   async init(flex, manager) {
-    setUpActions()
-
     flex.TaskCanvasHeader.Content.add(
       <TransferButton key='conversation-park-button' />,
       {

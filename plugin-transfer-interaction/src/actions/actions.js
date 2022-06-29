@@ -1,4 +1,10 @@
-import { Actions, TaskHelper } from '@twilio/flex-ui'
+import {
+  Actions,
+  TaskHelper,
+  Manager,
+  Notifications,
+  StateHelper
+} from '@twilio/flex-ui'
 import fetch from 'node-fetch'
 
 const URL_TRANSFER_INTERACTION = process.env.FLEX_APP_URL_TRANSFER_INTERACTION
@@ -25,6 +31,7 @@ const closeParticipantAndtransfer = async (payload, original) => {
   }
 
   const agent = await getAgent(payload)
+  const manager = Manager.getInstance()
 
   const body = {
     interactionSid: agent.interactionSid,
@@ -32,7 +39,9 @@ const closeParticipantAndtransfer = async (payload, original) => {
     participantSid: agent.participantSid,
     workflowSid: payload.task.workflowSid,
     taskChannelUniqueName: payload.task.taskChannelUniqueName,
-    taskAttributes: payload.task.attributes
+    taskAttributes: payload.task.attributes,
+    targetSid: payload.targetSid,
+    workerName: manager.user.identity
   }
 
   try {
@@ -47,7 +56,18 @@ const closeParticipantAndtransfer = async (payload, original) => {
     return Notifications.showNotification('transferredNotification')
   } catch (error) {
     console.error(error)
-    return Notifications.showNotification('errorTransferredNotification')
+    Notifications.showNotification('errorTransferredNotification', {
+      message: error.message
+    })
+
+    /*
+     * If we encounter an error with the transfer-interaction function we do not
+     * want to leave the customer with no one in the conversation.
+     */
+    const channel = StateHelper.getConversationStateForTask(payload.task)
+    if (channel) {
+      await channel.source.join()
+    }
   }
 }
 

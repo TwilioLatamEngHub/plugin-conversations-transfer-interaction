@@ -2,6 +2,7 @@ import React from 'react'
 import { FlexPlugin } from '@twilio/flex-plugin'
 
 import './actions'
+import './notifications'
 import { TransferButton } from './components'
 
 const PLUGIN_NAME = 'ConversationsTransferInteractionPlugin'

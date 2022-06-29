@@ -36,7 +36,7 @@ const closeParticipantAndtransfer = async (payload, original) => {
   }
 
   try {
-    const res = await fetch(URL_TRANSFER_INTERACTION, {
+    await fetch(URL_TRANSFER_INTERACTION, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -44,9 +44,10 @@ const closeParticipantAndtransfer = async (payload, original) => {
       body: JSON.stringify(body)
     })
 
-    console.log(res)
+    return Notifications.showNotification('transferredNotification')
   } catch (error) {
     console.error(error)
+    return Notifications.showNotification('errorTransferredNotification')
   }
 }
 

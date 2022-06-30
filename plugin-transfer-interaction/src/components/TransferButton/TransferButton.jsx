@@ -6,8 +6,7 @@ import { SkipForwardIcon } from '@twilio-paste/icons/esm/SkipForwardIcon'
 import { Theme } from '@twilio-paste/core/theme'
 
 const IconWrapper = styled.div`
-  margin: 1rem;
-  font-size: 1rem;
+  margin: 0.8rem;
   color: #fff;
   cursor: pointer;
 `
@@ -16,7 +15,11 @@ export const TransferButton = () => {
   return (
     <Theme.Provider theme='default'>
       <IconWrapper onClick={() => Actions.invokeAction('ShowDirectory')}>
-        <SkipForwardIcon decorative={false} title='Transfer Conversation' />
+        <SkipForwardIcon
+          size='sizeIcon40'
+          decorative={false}
+          title='Transfer Conversation'
+        />
       </IconWrapper>
     </Theme.Provider>
   )

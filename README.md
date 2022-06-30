@@ -57,7 +57,7 @@ npm install
 cp .env.example .env
 ```
 
-- Fill the `.env` file with the URL of your Twilio functions created earlier `/transfer-interaction`.
+- Fill the `.env` file with the URL of your Twilio function created earlier `/transfer-interaction`.
 
 - Inside the `/public` folder, create a `appConfig.js` file according to the `appConfig.example.js` file.
 
@@ -75,4 +75,4 @@ twilio flex:plugins:start
 
 ### Kudos
 
-Special thanks to [Aymen Naim](https://github.com/aymenn) for the thoughtful insights and assist on building this plugin.
+Special thanks to [Aymen Naim](https://github.com/aymenn) for the great contribuition on making this plugin.

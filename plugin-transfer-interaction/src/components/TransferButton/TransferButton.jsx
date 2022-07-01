@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Actions } from '@twilio/flex-ui'
 
@@ -15,25 +15,10 @@ const IconWrapper = styled.div`
 export const TransferButton = () => {
   const [isLoading, setIsLoading] = useState(false)
 
-  /*
-   *  The logic for the loading spinner to improve UX here is the following:
-   *  When the forward button is clicked, the loading is set to true. But we
-   *  need to remove the spinner in case the user only closes the directory
-   *  without transfering, that's why we add a listener to set to false on
-   *  beforeHideDirectory. Finally we set the loading to true again afterTransferTask.
-   */
-
-  const handleLoader = () => {
-    setIsLoading(true)
-    Actions.invokeAction('ShowDirectory')
-  }
-
-  Actions.addListener('beforeHideDirectory', () => {
-    setIsLoading(false)
-    Actions.addListener('afterTransferTask', () => {
-      setIsLoading(true)
-    })
-  })
+  useEffect(
+    () => Actions.addListener('beforeTransferTask', () => setIsLoading(true)),
+    []
+  )
 
   return (
     <Theme.Provider theme='default'>
@@ -42,7 +27,7 @@ export const TransferButton = () => {
           <Spinner size='sizeIcon40' decorative={false} title='Loading' />
         </IconWrapper>
       ) : (
-        <IconWrapper onClick={handleLoader}>
+        <IconWrapper onClick={() => Actions.invokeAction('ShowDirectory')}>
           <SkipForwardIcon
             size='sizeIcon40'
             decorative={false}

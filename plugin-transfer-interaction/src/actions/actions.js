@@ -68,6 +68,8 @@ const closeParticipantAndtransfer = async (payload, original) => {
     if (channel) {
       await channel.source.join()
     }
+
+    Actions.invokeAction('ReloadWindow')
   }
 }
 

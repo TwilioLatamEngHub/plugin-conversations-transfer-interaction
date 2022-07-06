@@ -2,16 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Actions } from '@twilio/flex-ui'
 
-import { Theme } from '@twilio-paste/core/theme'
 import { Spinner } from '@twilio-paste/core/spinner'
 import { SkipForwardIcon } from '@twilio-paste/icons/esm/SkipForwardIcon'
 
 const IconWrapper = styled.div`
-  margin: 0.7rem;
-  padding: 0.2rem;
-  border-radius: 0.25rem;
-  background-color: #060339;
-  color: #fff;
+  margin: 0.8rem;
   cursor: ${props => (props.isLoading ? 'not-allowed' : 'pointer')};
 `
 
@@ -27,13 +22,11 @@ export const TransferButton = () => {
     'Twilio-WorkerDirectory-ButtonContainer'
   )
   if (targetElement) {
-    targetElement.forEach(icon => {
-      icon.firstChild.style.visibility = 'hidden'
-    })
+    targetElement.forEach(icon => (icon.firstChild.style.display = 'none'))
   }
 
   return (
-    <Theme.Provider theme='default'>
+    <>
       {isLoading ? (
         <IconWrapper isLoading={isLoading}>
           <Spinner size='sizeIcon40' decorative={false} title='Loading' />
@@ -47,6 +40,6 @@ export const TransferButton = () => {
           />
         </IconWrapper>
       )}
-    </Theme.Provider>
+    </>
   )
 }

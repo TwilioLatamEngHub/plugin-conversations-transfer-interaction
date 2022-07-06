@@ -7,7 +7,10 @@ import { Spinner } from '@twilio-paste/core/spinner'
 import { SkipForwardIcon } from '@twilio-paste/icons/esm/SkipForwardIcon'
 
 const IconWrapper = styled.div`
-  margin: 0.8rem;
+  margin: 0.7rem;
+  padding: 0.2rem;
+  border-radius: 0.25rem;
+  background-color: #060339;
   color: #fff;
   cursor: ${props => (props.isLoading ? 'not-allowed' : 'pointer')};
 `
@@ -15,10 +18,19 @@ const IconWrapper = styled.div`
 export const TransferButton = () => {
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(
-    () => Actions.addListener('beforeTransferTask', () => setIsLoading(true)),
-    []
+  useEffect(() => {
+    Actions.addListener('beforeTransferTask', () => setIsLoading(true))
+  }, [])
+
+  // hide the call transfer icon from the directory
+  const targetElement = document.getElementsByClassName(
+    'Twilio-WorkerDirectory-ButtonContainer'
   )
+  if (targetElement) {
+    targetElement.forEach(icon => {
+      icon.firstChild.style.visibility = 'hidden'
+    })
+  }
 
   return (
     <Theme.Provider theme='default'>

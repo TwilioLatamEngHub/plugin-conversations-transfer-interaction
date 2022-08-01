@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Actions } from '@twilio/flex-ui'
+import { Actions, Manager } from '@twilio/flex-ui'
 
 import { Spinner } from '@twilio-paste/core/spinner'
 import { SkipForwardIcon } from '@twilio-paste/icons/esm/SkipForwardIcon'
@@ -17,13 +17,33 @@ export const TransferButton = () => {
     Actions.addListener('beforeTransferTask', () => setIsLoading(true))
   }, [])
 
-  // hide the call transfer icon from the directory
-  const targetElement = document.getElementsByClassName(
-    'Twilio-WorkerDirectory-ButtonContainer'
-  )
-  if (targetElement) {
-    targetElement.forEach(icon => (icon.firstChild.style.display = 'none'))
-  }
+  // TODO: hide the call transfer icon from the directory
+
+  // const targetElement = document.getElementsByClassName(
+  //   'Twilio-WorkerDirectory-ButtonContainer'
+  // )
+  // if (targetElement) {
+  //   targetElement.forEach(icon => (icon.firstChild.style.display = 'none'))
+  // }
+
+  // const queue = document.getElementsByClassName('Twilio-WorkerDirectory-Queue')
+  // const queueContent = document.getElementsByClassName(
+  //   'Twilio-WorkerDirectory-QueueContent'
+  // )
+
+  // if (queue.length > 0) {
+  //   const queueArr = Array.from(queue)
+
+  //   queueArr.forEach(() => {
+  //     const queueContentArr = Array.from(queueContent)
+
+  //     queueContentArr.forEach(queueContent => {
+  //       if (queueContent.innerText === 'Test Queue') {
+  //         queueContent.parentNode.remove()
+  //       }
+  //     })
+  //   })
+  // }
 
   return (
     <>

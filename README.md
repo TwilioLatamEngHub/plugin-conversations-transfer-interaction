@@ -14,7 +14,7 @@ This plugin adds a forward button in the chat in order to make a transfer either
 
 ![forward screen](forward-screen.png)
 
-![queue screen](queue-screen.png)
+![transfer screen](transfer-screen.png)
 
 ## Setup
 

@@ -17,7 +17,7 @@ export const TransferButton = () => {
     Actions.addListener('beforeTransferTask', () => setIsLoading(true))
   }, [])
 
-  // TODO: hide the call transfer icon from the directory
+  // TODO: hide the call icon from the directory
 
   // const targetElement = document.getElementsByClassName(
   //   'Twilio-WorkerDirectory-ButtonContainer'

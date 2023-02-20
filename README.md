@@ -2,7 +2,7 @@
 
 ## Deprecation Warning
 
-This plugin was the first one whem the new Twilio Flex Conversations architecture came out. Since then, Twilio's professional services team worked on top of mine and built a more robust one. You should use theirs, here it is: https://github.com/twilio-professional-services/flex-project-template/tree/main/plugin-flex-ts-template-v2/src/feature-library/chat-transfer
+This plugin was the first one when the new Twilio Flex Conversations architecture came out. Since then, Twilio's professional services team worked on top of mine and built a more robust one. You should use theirs, here it is: https://github.com/twilio-professional-services/flex-project-template/tree/main/plugin-flex-ts-template-v2/src/feature-library/chat-transfer
 
 ## Disclaimer
 
